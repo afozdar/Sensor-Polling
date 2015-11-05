@@ -1,4 +1,7 @@
 # Sensor-Polling
+
+### Warning -- Incomplete Readme
+
 ### Overview
 Sensor polling is one of two components in this anomaly detection tool:
 
@@ -10,5 +13,9 @@ compliant smart home sensors and supplying it to the [detection algorithm] (http
 in the correct format. 
 
 ### Installation, Configuration and Usage
+#### Required Modules
++ [matplotlib](http://matplotlib.org/users/installing.html)
++ [numpy](http://www.scipy.org/scipylib/download.html)
+
 
 ### License
