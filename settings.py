@@ -8,6 +8,14 @@ from urllib import urlopen as openurl
 import urllib2
 import binascii
 
+'''get JSON PATH from the config file'''
+JSON_PATH = ''
+with open('config.txt') as f:
+    for line in f:
+        if line.startswith('JSON_PATH'):
+            loc = line.find('=')
+            JSON_PATH = line[loc+1:]
+
 def parse_bgcolor(bgcolor):
     if not bgcolor.startswith('#'):
         raise ValueError('A rbgcolor must start with a "#"')
@@ -58,6 +66,7 @@ def check_settings():
         if indx != i:
             sys.exit("Error parsing JSON dictionary: 'graphnumber' must be an integer between 0 and {} and must not skip any integers in that range." .format((num_sensors-1)))
         indx += 1
+
 def init():
     global SENSOR_REF_ERR
     global SENSOR_DATA_ERR
@@ -68,7 +77,7 @@ def init():
     global sensorinfo
     global date_arr
     global open_file
-    json_file = open('/usr/local/sbin/ISGADA/pyscripts/json_files/ne_sensors.json')
+    json_file = open(JSON_PATH)
     sensorinfo = json.load(json_file)
     if(sensorinfo["generate"] == "data" or sensorinfo["generate"] == "both"):
         logging.info("Initializing data file variables...")

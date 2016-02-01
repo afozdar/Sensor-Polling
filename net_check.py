@@ -9,13 +9,22 @@ import subprocess
 ## CUSTOM MODULES ##
 import settings as st
 
-server_ip = "server.ip.goes.here:port"
+SERVER_IP = ''
+SERVER_PORT = ''
+with open('config.txt') as f:
+    for line in f:
+        if line.startswith('SERVER_IP'):
+            loc = line.find('=')
+            SERVER_IP = line[loc+1:]
+        elif line.startswith('SERVER_PORT'):
+            loc = line.find('=')
+            SERVER_PORT = line[loc+1:]
 
 ################ START -- Networking Check Functions ##############
 
 def check_conn():
     try:
-        response = urllib2.urlopen("http://"+ server_ip + "/", timeout=5)
+        response = urllib2.urlopen("http://"+ SERVER_IP + ':' + SERVER_PORT + "/", timeout=5)
         response.close()
         return True
     except urllib2.URLError, err: 
